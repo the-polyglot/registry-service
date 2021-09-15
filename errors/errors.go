@@ -11,15 +11,15 @@ var (
 		Code:    http.StatusInternalServerError,
 		Message: "Something went wrong",
 	}
-	
+
 	ErrBadRequest = &Error{
 		Code:    http.StatusBadRequest,
 		Message: "Error invalid argument",
 	}
-	
-	ErrEventNotFound = &Error{
+
+	ErrNotFound = &Error{
 		Code:    http.StatusNotFound,
-		Message: "Event not found",
+		Message: "Not found",
 	}
 )
 
@@ -39,7 +39,6 @@ func (err *Error) String() string {
 	return fmt.Sprintf("error: code=%s message=%s", http.StatusText(err.Code), err.Message)
 }
 
-// JSON convert Error in json
 func (err *Error) JSON() []byte {
 	if err == nil {
 		return []byte("{}")
@@ -48,7 +47,6 @@ func (err *Error) JSON() []byte {
 	return res
 }
 
-// StatusCode get status code
 func (err *Error) StatusCode() int {
 	if err == nil {
 		return http.StatusOK
